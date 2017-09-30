@@ -1,3 +1,4 @@
+#coding=UTF-8
 import requests
 
 def get_info(url):
