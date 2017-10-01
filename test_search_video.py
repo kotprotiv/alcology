@@ -11,7 +11,7 @@ def get_info(url):
 
 if __name__ == "__main__":
 	#api_key = 'AIzaSyD-a9IF8KKYgoC3cpgS-Al7hLQDbugrDcw'
-	api_key = 'AIzaSyCwO8iVRlarbi_7S7ZR9KQBvGItRcqAFrw'	
+	api_key = 'AIzaSyCwO8iVRlarbi_7S7ZR9KQBvGItRcqAFrw'
 	search_text = 'котики'
 
 	url = "https://content.googleapis.com/youtube/v3/search?part=snippet&type=video&key=%s&q=%s" % (api_key, search_text)
