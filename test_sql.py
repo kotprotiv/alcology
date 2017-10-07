@@ -50,6 +50,9 @@ class Recipe(Base):
     ingredient_id = Column(Integer, ForeignKey('ingredients.id'))
     amount = Column(Integer)
 
+    def __repr__(self):
+        return '<I am a recipe object!>'
+
 
 class RecipeVideos(Base):
     __tablename__ = 'recipe_videos'
