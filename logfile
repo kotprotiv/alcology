@@ -1,0 +1,2 @@
+FATAL:  data directory "/Users/andrewgromov/projects/alcology/alcology/db" has group or world access
+DETAIL:  Permissions should be u=rwx (0700).

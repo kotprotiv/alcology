@@ -3,7 +3,7 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('postgresql://localhost/[YOUR_DATABASE_NAME]')	#???????
+engine = create_engine('postgresql://alcology:hummussgribami@www.alcology.ru:5432/alcology')
 
 db_session = scoped_session(sessionmaker(bind=engine))
 
@@ -45,6 +45,7 @@ class Ingredient(Base):
 
 class Recipe(Base):
     __tablename__ = 'recipes'
+    id = Column(Integer, primary_key=True)
     cocktail_id = Column(Integer, ForeignKey('cocktails.id'))
     ingredient_id = Column(Integer, ForeignKey('ingredients.id'))
     amount = Column(Integer)
