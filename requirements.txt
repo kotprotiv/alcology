@@ -3,3 +3,4 @@ Flask == 0.12.2
 Jinja2 == 2.9.6
 requests == 2.18.4
 SQLAlchemy == 1.1.9
+psycopg2 == 2.7.3.1

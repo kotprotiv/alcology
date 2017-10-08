@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-import requests
 from youtube_search import youtube_search
 
 api_key = 'AIzaSyCwO8iVRlarbi_7S7ZR9KQBvGItRcqAFrw'
