@@ -3,7 +3,13 @@ from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('postgresql://alcology:hummussgribami@www.alcology.ru:5432/alcology')
+try:
+    from local_settings import *
+except ImportError:
+    print('Не настроен локальный файл со строкой соединения с базой данных')
+    raise
+
+engine = create_engine(connection_string)
 
 db_session = scoped_session(sessionmaker(bind=engine))
 
