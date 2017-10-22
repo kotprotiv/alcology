@@ -22,14 +22,18 @@ class Cocktail(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
     strength = Column(Integer)
-    description = Column(Text)
+    # description = Column(Text)
     recipe_text = Column(Text)
     photo = Column(String(1000))
-    recipe = relationship('Recipe', backref='cocktail_id')
-    video = relationship('RecipeVideos', backref='cocktail_id')
 
-    def __init__(self, name=None):
+    recipe = relationship('Recipe', backref='cocktail')
+    video = relationship('RecipeVideos', backref='cocktail')
+
+    def __init__(self, name=None, strength=None, recipe_text=None, photo=None):
         self.name = name
+        self.strength = strength
+        self.recipe_text = recipe_text
+        self.photo = photo
 
     def __repr__(self):
         return '<Cocktail {}>'.format(self.name)
@@ -40,7 +44,23 @@ class Ingredient(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=True)
     description = Column(Text)
-    recipe = relationship('Recipe', backref='ingredient_id')
+
+    recipe = relationship('Recipe', backref='ingredient')
+
+    def __init__(self, name=None, description=None):
+        self.name = name
+        self.description = description
+
+    def __repr__(self):
+        return '<Ingredient {}>'.format(self.name)
+
+
+class Unit(Base):
+    __tablename__ = 'units'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), unique=True)
+
+    recipe = relationship('Recipe', backref='unit')
 
     def __init__(self, name=None):
         self.name = name
@@ -54,7 +74,13 @@ class Recipe(Base):
     id = Column(Integer, primary_key=True)
     cocktail_id = Column(Integer, ForeignKey('cocktails.id'))
     ingredient_id = Column(Integer, ForeignKey('ingredients.id'))
+    unit_id = Column(Integer, ForeignKey('units.id'))
     amount = Column(Integer)
+
+    def __init__(self, cocktail_id=None, ingredient_id=None, amount=None):
+        self.cocktail_id = cocktail_id
+        self.ingredient_id - ingredient_id
+        self.amount = amount
 
     def __repr__(self):
         return '<I am a recipe object!>'
@@ -63,14 +89,15 @@ class Recipe(Base):
 class RecipeVideos(Base):
     __tablename__ = 'recipe_videos'
     id = Column(Integer, primary_key=True)
-    cocktail_id = Column(Integer)
-    code = Column(String(50), unique=True)
+    cocktail_id = Column(Integer, ForeignKey('cocktails.id'))
+    url = Column(String(50), unique=True)
 
-    def __init__(self, code=None):
-        self.code = code
+    def __init__(self, cocktail_id=None, url=None):
+        self.cocktail_id = cocktail_id
+        self.url = url
 
     def __repr__(self):
-        return '<Video {}>'.format(self.code)
+        return '<Video {}>'.format(self.url)
 
 
 if __name__ == "__main__":
